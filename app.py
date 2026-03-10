@@ -204,7 +204,7 @@
 
 
 import streamlit as st
-from langchain_community.llms import Ollama
+from langchain_community.llms import HuggingFaceHub
 from langchain.agents import Tool, initialize_agent, AgentType
 
 from agent_tools import (
@@ -281,7 +281,10 @@ st.divider()
 
 @st.cache_resource
 def load_agent():
-    llm = Ollama(model="mistral")
+    llm = HuggingFaceHub(
+    repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+    model_kwargs={"temperature":0.3, "max_length":512}
+)
 
     tools = [
         Tool(
@@ -364,4 +367,5 @@ if prompt := st.chat_input("💬 Type your question here..."):
     )
 
 st.divider()
+
 st.markdown('<p class="footer">Built using LangChain + Ollama + Streamlit</p>', unsafe_allow_html=True)
