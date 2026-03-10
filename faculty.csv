@@ -1,0 +1,6 @@
+FacultyID,Name,Department,Course,HoursPerWeek
+F101,Prof. Sharma,CSE,Data Structure (DSA),6
+F102,Prof. Mehta,CSE,AI and ML,8
+F103,Prof. Rao,ECE,Embedded Systems,5
+F104,Prof. Iyer,EE,Network Theory,6
+F105,Prof. Krishnamurthy,ME,Fluid Mechanics,7

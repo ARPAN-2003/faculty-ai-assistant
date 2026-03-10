@@ -1,0 +1,3 @@
+- Maximum workload per professor: 12 hours per week.
+- No faculty should have more than 3 consecutive teaching hours.
+- Faculty should have at least one free slot between two sessions.

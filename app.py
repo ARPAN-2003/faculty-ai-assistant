@@ -1,0 +1,367 @@
+# import streamlit as st
+# from langchain_community.llms import Ollama
+# from langchain.agents import Tool, initialize_agent, AgentType
+
+# from agent_tools import (
+#     policy_tool,
+#     faculty_workload_tool,
+#     dept_summary_tool,
+#     timetable_tool,
+#     free_faculty_tool
+# )
+
+# # ---------------------------
+# # PAGE CONFIG
+# # ---------------------------
+
+# st.set_page_config(
+#     page_title="Faculty AI Assistant",
+#     page_icon="🎓",
+#     layout="wide"
+# )
+
+# # ---------------------------
+# # DARK THEME CUSTOM CSS
+# # ---------------------------
+
+# st.markdown("""
+# <style>
+
+# body {
+#     background-color: #0E1117;
+# }
+
+# .main {
+#     background-color: #0E1117;
+# }
+
+# .stTextInput > div > div > input {
+#     background-color: #1E1E1E;
+#     color: white;
+# }
+
+# .stTextArea textarea {
+#     background-color: #1E1E1E;
+#     color: white;
+# }
+
+# .big-title {
+#     font-size: 40px;
+#     font-weight: 700;
+#     color: #00F5FF;
+# }
+
+# .answer-box {
+#     background-color: #1E1E1E;
+#     padding: 20px;
+#     border-radius: 12px;
+#     border: 1px solid #00F5FF;
+#     color: white;
+#     font-size: 16px;
+# }
+
+# .footer {
+#     text-align: center;
+#     color: gray;
+#     font-size: 13px;
+# }
+
+# </style>
+# """, unsafe_allow_html=True)
+
+# # ---------------------------
+# # HEADER
+# # ---------------------------
+
+# st.markdown('<p class="big-title">🎓 Faculty Workload & Timetable AI Assistant</p>', unsafe_allow_html=True)
+# st.write("Ask anything about faculty workload, timetable, or university policies.")
+
+# st.divider()
+
+# # ---------------------------
+# # LOAD AGENT (Cached)
+# # ---------------------------
+
+# @st.cache_resource
+# def load_agent():
+#     llm = Ollama(model="mistral")
+
+#     tools = [
+#         Tool(
+#             name="PolicyRules",
+#             func=policy_tool,
+#             description="Answer questions about workload policies."
+#         ),
+#         Tool(
+#             name="FacultyWorkload",
+#             func=faculty_workload_tool,
+#             description="Get workload of a specific professor."
+#         ),
+#         Tool(
+#             name="DepartmentSummary",
+#             func=dept_summary_tool,
+#             description="Summarize department workload."
+#         ),
+#         Tool(
+#             name="TimetableLookup",
+#             func=timetable_tool,
+#             description="Show full timetable."
+#         ),
+#         Tool(
+#             name="FreeFaculty",
+#             func=free_faculty_tool,
+#             description="Find free faculty. Format: Day=Tuesday, Time=14:00-15:00"
+#         ),
+#     ]
+
+#     agent = initialize_agent(
+#         tools,
+#         llm,
+#         agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+#         verbose=True,
+#         handle_parsing_errors=True,
+#         max_iterations=2,
+#         early_stopping_method="force"
+#     )
+
+#     return agent
+
+
+# agent = load_agent()
+
+# # ---------------------------
+# # USER INPUT SECTION
+# # ---------------------------
+
+# user_query = st.text_input("💬 Enter your question:", placeholder="e.g., What is Prof. Sharma's workload?")
+
+# submit = st.button("🚀 Submit")
+
+# st.divider()
+
+# # ---------------------------
+# # RESPONSE DISPLAY
+# # ---------------------------
+
+# if submit and user_query:
+#     with st.spinner("🤖 Thinking..."):
+#         response = agent.run(user_query)
+
+#     st.markdown('<div class="answer-box">', unsafe_allow_html=True)
+#     st.write(response)
+#     st.markdown('</div>', unsafe_allow_html=True)
+
+# # ---------------------------
+# # FOOTER
+# # ---------------------------
+
+# st.divider()
+# st.markdown('<p class="footer">Built using LangChain + Ollama + Streamlit</p>', unsafe_allow_html=True)
+
+
+
+
+
+# st.markdown("""
+# <style>
+# body {
+#     background-color: #0E1117;
+# }
+
+# .big-title {
+#     font-size: 36px;
+#     font-weight: 700;
+#     color: #00F5FF;
+# }
+
+# .chat-user {
+#     background-color: #1E1E1E;
+#     padding: 15px;
+#     border-radius: 12px;
+#     margin-bottom: 10px;
+#     border-left: 4px solid #00F5FF;
+#     color: white;
+# }
+
+# .chat-bot {
+#     background-color: #141922;
+#     padding: 15px;
+#     border-radius: 12px;
+#     margin-bottom: 20px;
+#     border-left: 4px solid #00FFAA;
+#     color: white;
+# }
+
+# .footer {
+#     text-align: center;
+#     color: gray;
+#     font-size: 13px;
+# }
+# </style>
+# """, unsafe_allow_html=True)
+
+
+
+
+import streamlit as st
+from langchain_community.llms import Ollama
+from langchain.agents import Tool, initialize_agent, AgentType
+
+from agent_tools import (
+    policy_tool,
+    faculty_workload_tool,
+    dept_summary_tool,
+    timetable_tool,
+    free_faculty_tool
+)
+
+# ---------------------------
+# PAGE CONFIG
+# ---------------------------
+
+st.set_page_config(
+    page_title="Faculty AI Assistant",
+    page_icon="🎓",
+    layout="wide"
+)
+
+# ---------------------------
+# DARK THEME STYLING
+# ---------------------------
+
+st.markdown("""
+<style>
+body {
+    background-color: #0E1117;
+}
+
+.big-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #00F5FF;
+}
+
+.hero-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 800;
+    color: #00F5FF;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #AAAAAA;
+    margin-bottom: 40px;
+}
+
+.footer {
+    text-align: center;
+    color: gray;
+    font-size: 13px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------------------
+# HEADER
+# ---------------------------
+
+st.markdown('<div class="hero-title">🎓 Faculty Workload & Timetable AI Assistant</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="hero-subtitle">Ask anything about faculty workload, timetable, or university policies.</div>', unsafe_allow_html=True)
+
+st.divider()
+
+# ---------------------------
+# LOAD AGENT (CACHED)
+# ---------------------------
+
+@st.cache_resource
+def load_agent():
+    llm = Ollama(model="mistral")
+
+    tools = [
+        Tool(
+            name="PolicyRules",
+            func=policy_tool,
+            description="Answer questions about workload policies."
+        ),
+        Tool(
+            name="FacultyWorkload",
+            func=faculty_workload_tool,
+            description="Get workload of a specific professor."
+        ),
+        Tool(
+            name="DepartmentSummary",
+            func=dept_summary_tool,
+            description="Summarize department workload."
+        ),
+        Tool(
+            name="TimetableLookup",
+            func=timetable_tool,
+            description="Show full timetable."
+        ),
+        Tool(
+            name="FreeFaculty",
+            func=free_faculty_tool,
+            description="Find free faculty. Format: Day=Tuesday, Time=14:00-15:00"
+        ),
+    ]
+
+    agent = initialize_agent(
+        tools,
+        llm,
+        agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+        verbose=True,
+        handle_parsing_errors=True,
+        max_iterations=2,
+        early_stopping_method="force"
+    )
+
+    return agent
+
+
+agent = load_agent()
+
+# ---------------------------
+# CHAT MEMORY
+# ---------------------------
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# ---------------------------
+# DISPLAY OLD MESSAGES
+# ---------------------------
+
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
+
+# ---------------------------
+# CHAT INPUT (NO ERRORS)
+# ---------------------------
+
+if prompt := st.chat_input("💬 Type your question here..."):
+
+    # Show user message
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Generate response
+    with st.chat_message("assistant"):
+        with st.spinner("🤖 Thinking..."):
+            response = agent.run(prompt)
+            st.markdown(response)
+
+    # Save assistant response
+    st.session_state.messages.append(
+        {"role": "assistant", "content": response}
+    )
+
+st.divider()
+st.markdown('<p class="footer">Built using LangChain + Ollama + Streamlit</p>', unsafe_allow_html=True)
