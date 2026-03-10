@@ -282,8 +282,8 @@ st.divider()
 @st.cache_resource
 def load_agent():
     llm = HuggingFaceHub(
-    repo_id="mistralai/Mistral-7B-Instruct-v0.2",
-    model_kwargs={"temperature":0.3, "max_length":512}
+    repo_id="google/flan-t5-large",
+    model_kwargs={"temperature":0.5, "max_length":512}
 )
 
     tools = [
@@ -369,3 +369,4 @@ if prompt := st.chat_input("💬 Type your question here..."):
 st.divider()
 
 st.markdown('<p class="footer">Built using LangChain + Ollama + Streamlit</p>', unsafe_allow_html=True)
+
