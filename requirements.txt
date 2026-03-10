@@ -1,6 +1,6 @@
 streamlit
-langchain
-langchain-community
+langchain==0.0.352
+langchain-community==0.0.20
 chromadb
 sentence-transformers
 pandas
