@@ -204,7 +204,7 @@
 
 
 import streamlit as st
-from langchain_community.llms import HuggingFaceHub
+from langchain_huggingface import HuggingFaceHub
 from langchain.agents import Tool, initialize_agent, AgentType
 
 from agent_tools import (
@@ -369,4 +369,5 @@ if prompt := st.chat_input("💬 Type your question here..."):
 st.divider()
 
 st.markdown('<p class="footer">Built using LangChain + Ollama + Streamlit</p>', unsafe_allow_html=True)
+
 
