@@ -15,4 +15,6 @@ db = Chroma.from_documents(
     persist_directory="policy_db"
 )
 
+db.persist()
+
 print("Vector DB created successfully")
