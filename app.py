@@ -1,8 +1,3 @@
-import os
-
-if not os.path.exists("policy_db"):
-    import store_rules
-
 import streamlit as st
 from langchain_huggingface import HuggingFaceHub
 from langchain.agents import Tool, initialize_agent, AgentType
@@ -81,6 +76,11 @@ st.divider()
 
 @st.cache_resource
 def load_agent():
+    import os
+    
+    if not os.path.exists("policy_db"):
+        import store_rules
+
     llm = HuggingFaceHub(
     repo_id="google/flan-t5-base",
     huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"],
@@ -170,6 +170,7 @@ if prompt := st.chat_input("💬 Type your question here..."):
 st.divider()
 
 st.markdown('<p class="footer">Built using LangChain + HuggingFace + Streamlit</p>', unsafe_allow_html=True)
+
 
 
 
