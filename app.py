@@ -82,7 +82,8 @@ st.divider()
 @st.cache_resource
 def load_agent():
     llm = HuggingFaceHub(
-    repo_id="google/flan-t5-large",
+    repo_id="google/flan-t5-base",
+    huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"],
     model_kwargs={"temperature":0.5, "max_length":512}
 )
 
@@ -168,7 +169,8 @@ if prompt := st.chat_input("💬 Type your question here..."):
 
 st.divider()
 
-st.markdown('<p class="footer">Built using LangChain + Ollama + Streamlit</p>', unsafe_allow_html=True)
+st.markdown('<p class="footer">Built using LangChain + HuggingFace + Streamlit</p>', unsafe_allow_html=True)
+
 
 
 
