@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_community.llms.huggingface_hub import HuggingFaceHub
+from langchain_community.llms import HuggingFaceHub
 from langchain.agents import Tool, initialize_agent, AgentType
 
 from agent_tools import (
